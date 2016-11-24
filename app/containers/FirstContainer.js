@@ -1,8 +1,7 @@
-var React = require('react');
-var First = require('../components/First');
-var counter = 0;
+import React, {Component} from 'react';
+import FirstComponent from '../components/First';
 
-var FirstContainer = React.createClass({
+class FirstContainer extends Component {
 
   getInitialState: function() {
     return {
@@ -24,7 +23,7 @@ var FirstContainer = React.createClass({
     });
   },
 
-  render: function () {
+  render () {
     return (
       <First
         header={this.state.header}
