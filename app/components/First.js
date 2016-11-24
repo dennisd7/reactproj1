@@ -2,18 +2,21 @@
 //
 // first component
 
-var React = require('react');
-var PropTypes = React.PropTypes;
+import React, { Component, PropTypes } from 'react'
 
-function First (props) {
-  return (
-    <div>
-      <p> Goodbye! </p>
-      <button type="submit" className="btn btn-success" onClick={props.increment}>Increment</button>
-      <button type="button" className="btn btn-danger" onClick={props.decrement}>Decrement</button>
-      <h1>{props.header}</h1>
-    </div>
-  )
+class First extends Component {
+  render() {
+    const { value, increment, decrement, style } = this.props
+
+    return (
+      <div style={style}>
+        <p> Goodbye! </p>
+        <button type="submit" className="btn btn-success" onClick={increment}>Increment</button>
+        <button type="button" className="btn btn-danger" onClick={decrement}>Decrement</button>
+        <h1>{value}</h1>
+      </div>
+    )
+  }
 }
 
-module.exports = First;
+export default First

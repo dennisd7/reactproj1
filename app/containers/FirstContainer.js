@@ -1,38 +1,62 @@
-var React = require('react');
-var First = require('../components/First');
-var counter = 0;
+import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import First from '../components/First';
 
-var FirstContainer = React.createClass({
+/*
+return {
+  value: state.dennis
+};
+*/
 
-  getInitialState: function() {
-    return {
-      header: 0
-    }
-  },
+function mapStateToProps (state, ownProps) {
+//
+  // var pState = state; // { dennis: 0, alice: 0 }
+  // var key = ownProps.name; // === 'dennis'
 
-  handleIncrement: function() {
-    console.log("HandleIncrement", this.props, this.state);
-    this.setState({
-      header: this.state.header + 1
-    });
-  },
+  // ownProps === { name: 'dennis', style: {} };
+  // ownProps.name === ownProps['name'] === 'dennis'
+  //
+  // var obj = { 'name.lowercase': true }
+  //
+  // obj['name.lowercase'] obj.name-lowercase
 
-  handleDecrement: function() {
-    console.log("HandleDecrement");
-    this.setState({
-      header: this.state.header - 1
-    });
-  },
+  return {
+    value: state[ownProps.name] // === 'dennis'
+  };
 
-  render: function () {
-    return (
-      <First
-        header={this.state.header}
-        increment={this.handleIncrement}
-        decrement={this.handleDecrement}
-      />
-    )
+}
+
+function mapDispatchToProps (dispatch, ownProps) {
+  return {
+    increment: () => dispatch({ type: `${ownProps.name}/INCREMENT` }),
+    decrement: () => dispatch({ type: `${ownProps.name}/DECREMENT` }), // "dennis/DECREMENT"
   }
-});
+}
+
+// const mapDispatchToProps = (dispatch) => ({
+//   increment: () => dispatch({type: 'INCREMENT'}),
+//   decrement: () => dispatch({type: 'DECREMENT'})
+// });
+
+
+class FirstContainer extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const { value, increment, decrement, style } = this.props;
+
+    return <First
+      style={style}
+      value={value}
+      increment={increment}
+      decrement={decrement}
+    />
+  }
+}
+
+FirstContainer = connect(mapStateToProps, mapDispatchToProps)(FirstContainer);
 
 module.exports = FirstContainer;

@@ -1,23 +1,28 @@
-//import 'bootstrap/dist/css/bootstrap.css';
-//import 'bootstrap';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import firstreducer from './reducers';
+import incrementbytwo from './reducers/incrementbytwo';
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 
-var React = require('react')
-var ReactDOM = require('react-dom')
+var ReactDOM = require('react-dom');
+var FirstContainer = require('./containers/FirstContainer');
 
-//var express = require('express')
-//app = express();
 
-var FirstContainer = require('./containers/FirstContainer')
+const store = createStore(combineReducers({
+  dennis: firstreducer,
+  alice: incrementbytwo
+}), (
+  typeof window.devToolsExtension === 'function' ?
+  window.devToolsExtension() : undefined
+));
 
-var HelloWorld = React.createClass({
-  render: function(){
-    return (
-      <div>
-        Hello World!
-        <FirstContainer />
-      </div>
-    )
-  }
-});
-
-ReactDOM.render(<HelloWorld />, document.getElementById('app'));
+ReactDOM.render((
+  <Provider store={store}>
+    <div>
+      Hello World!
+      <FirstContainer name="dennis" style={{ marginTop: '10px' }} />
+      <FirstContainer name="alice" />
+    </div>
+  </Provider>
+), document.getElementById('app'));

@@ -15,7 +15,12 @@ module.exports = {
   },
   module: {
     loaders: [
-      {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"}
+      {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},
+      {test: /\.css$/, loader: "style!css"},
+      {
+        test: /\.(eot|woff|woff2|ttf|svg|png|jpg)([\?]?.*)$/,
+        loader: 'file-loader?name=[name].[ext]'
+      }
     ]
   },
   plugins: [HTMLWebpackPluginConfig]
