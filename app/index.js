@@ -4,9 +4,8 @@ import firstreducer from './reducers';
 import incrementbytwo from './reducers/incrementbytwo';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-
-var ReactDOM = require('react-dom');
-var FirstContainer = require('./containers/FirstContainer');
+import ReactDOM from 'react-dom';
+import FirstContainer from './containers/FirstContainer';
 
 
 const store = createStore(combineReducers({
