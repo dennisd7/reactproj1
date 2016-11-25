@@ -59,4 +59,4 @@ class FirstContainer extends Component {
 
 FirstContainer = connect(mapStateToProps, mapDispatchToProps)(FirstContainer);
 
-module.exports = FirstContainer;
+export default FirstContainer;
